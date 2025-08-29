@@ -6,7 +6,7 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 03:53:33 by bcili             #+#    #+#             */
-/*   Updated: 2025/08/29 15:18:10 by bcili            ###   ########.fr       */
+/*   Updated: 2025/08/29 20:26:22 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,39 @@ char	*find_env_value(t_shell *shell, char *str, t_exp *exp, char *sub_str)
 					shell->envp, exp->variable_length);
 			collect_grbg(shell, sub_str);
 			if (!sub_str)
+			{
 				sub_str = "";
+				return (NULL);
+			}
 		}
+		str = sub_str;
+		exp->current_index = 0;
 		return (sub_str);
 	}
-	return(NULL);///////////substr?
+	return (str);
 }
 
 char	*handle_expansion(t_shell *shell, char *str, t_exp *exp, char *sub_str)
 {
+	char	*result;
+
 	while (str[exp->current_index])
 	{
 		exp->s_quote = (exp->s_quote + (!exp->d_quote
 					&& str[exp->current_index] == '\'')) % 2;
 		exp->d_quote = (exp->d_quote
 				+ (!exp->s_quote && str[exp->current_index] == '\"')) % 2;
-		sub_str = find_env_value(shell, str, exp, sub_str);
+		result = find_env_value(shell, str, exp, sub_str);
+		if (!result)
+			break ;
+		if (result != str)
+		{
+			str = result;
+			continue ;
+		}
 		exp->current_index++;
 	}
-	return (sub_str);
+	return (str);
 }
 
 char	*handle_g_exitstatus(t_shell *shell, int i, char *str, char *sub_str)

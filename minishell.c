@@ -6,7 +6,7 @@
 /*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 17:48:02 by bcili             #+#    #+#             */
-/*   Updated: 2025/08/29 15:39:29 by bcili            ###   ########.fr       */
+/*   Updated: 2025/08/29 20:41:08 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,34 +29,6 @@ void	start_main_loop(t_shell *shell)
 			execute_cmds(shell);
 		shell->cmd_list = NULL;
 	}
-}
-
-void	pipe_infile_outfile(t_node *cmd_lst)
-{
-	int		*pip;
-
-	while (cmd_lst->next != NULL)
-	{
-		pip = ft_calloc(2, sizeof(int));
-		if (!pip)
-			return ;
-		if (pipe(pip) == -1)
-		{
-			free(pip);
-			return ;
-		}
-		if (cmd_lst->data->outfile == 1)
-			cmd_lst->data->outfile = pip[1];
-		else
-			close(pip[1]);
-		if (cmd_lst->next->data->infile == 0)
-			cmd_lst->next->data->infile = pip[0];
-		else
-			close(pip[0]);
-		cmd_lst = cmd_lst->next;
-		free(pip);
-	}
-	return ;
 }
 
 int	main(int argc, char *argv[], char **envp)
