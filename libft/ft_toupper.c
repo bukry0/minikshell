@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bcili <bcili@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 13:46:17 by saskin            #+#    #+#             */
-/*   Updated: 2024/10/23 15:37:08 by saskin           ###   ########.fr       */
+/*   Created: 2024/11/05 19:24:48 by bcili             #+#    #+#             */
+/*   Updated: 2024/11/07 18:42:47 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_toupper(int c)
 {
-	if (c >= 'a' && c <= 'z')
-	{
-		c = c - 32;
-	}
+	if (c <= 'z' && c >= 'a')
+		return (c - 32);
 	return (c);
 }

@@ -3,39 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/18 15:43:04 by saskin            #+#    #+#             */
-/*   Updated: 2024/10/30 19:18:18 by saskin           ###   ########.fr       */
+/*   Created: 2024/11/05 19:18:44 by bcili             #+#    #+#             */
+/*   Updated: 2024/12/04 14:23:14 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	count_words(char const *s, char c)
+static int	ft_count_word(const char *s, char c, char ***res, int *i)
 {
-	size_t	count;
+	int	count_word;
+	int	flag;
 
-	count = 0;
+	count_word = 0;
+	flag = 0;
+	*i = 0;
 	while (*s)
 	{
-		while (*s == c)
-			s++;
-		if (*s)
-			count++;
-		while (*s && *s != c)
-			s++;
+		if (*s != c && !flag)
+		{
+			flag = 1;
+			count_word++;
+		}
+		else if (*s == c)
+			flag = 0;
+		s++;
 	}
-	return (count);
+	*res = malloc(sizeof(char *) * (count_word + 1));
+	return (count_word);
 }
 
-static size_t	check(char **res, size_t i)
+static int	free_node(char **str, int index)
 {
-	if (!res[i])
+	int	i;
+
+	i = 0;
+	if (!str[index - 1])
 	{
-		while (i > 0)
-			free(res[--i]);
-		free(res);
+		while (str[i])
+		{
+			free(str[i]);
+			i++;
+		}
+		free(str);
 		return (0);
 	}
 	return (1);
@@ -43,29 +55,28 @@ static size_t	check(char **res, size_t i)
 
 char	**ft_split(char const *s, char c)
 {
-	char		**list;
-	size_t		count;
-	const char	*begin;
+	char	**result;
+	int		i;
+	int		j;
+	int		len;
 
-	count = 0;
-	list = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1));
-	if (!list)
-		return (NULL);
-	while (*s)
+	if (!s)
+		return (0);
+	len = ft_count_word(s, c, &result, &i);
+	if (!result)
+		return (0);
+	while (i < len)
 	{
 		while (*s == c)
 			s++;
-		if (*s)
-		{
-			begin = s;
-			while (*s && *s != c)
-				s++;
-			list[count] = ft_substr(begin, 0, s - begin);
-			if (!check(list, count))
-				return (NULL);
-			count++;
-		}
+		j = 0;
+		while (s[j] != c && s[j])
+			j++;
+		result[i++] = ft_substr(s, 0, j);
+		if (free_node(result, i) == 0)
+			return (0);
+		s += j;
 	}
-	list[count] = NULL;
-	return (list);
+	result[i] = 0;
+	return (result);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bcili <bcili@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 14:11:31 by saskin            #+#    #+#             */
-/*   Updated: 2024/10/23 15:37:17 by saskin           ###   ########.fr       */
+/*   Created: 2024/11/05 19:18:48 by bcili             #+#    #+#             */
+/*   Updated: 2024/11/06 17:44:18 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	unsigned int	i;
+	size_t	i;
 
 	i = 0;
 	while (s[i])
@@ -23,7 +23,7 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)(s + i));
 		i++;
 	}
-	if ((char)c == '\0')
+	if ((char)c == 0)
 		return ((char *)(s + i));
-	return (NULL);
+	return (0);
 }

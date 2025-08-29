@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bcili <bcili@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 18:28:30 by saskin            #+#    #+#             */
-/*   Updated: 2024/10/23 15:11:56 by saskin           ###   ########.fr       */
+/*   Created: 2024/11/05 19:17:55 by bcili             #+#    #+#             */
+/*   Updated: 2024/11/07 18:37:27 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isprint(int c)
 {
-	if (c <= 126 && c >= 32)
-		return (1);
-	return (0);
+	return (c >= 32 && c <= 126);
 }

@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bcili <bcili@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 14:08:55 by saskin            #+#    #+#             */
-/*   Updated: 2024/10/23 15:37:03 by saskin           ###   ########.fr       */
+/*   Created: 2024/11/05 19:24:45 by bcili             #+#    #+#             */
+/*   Updated: 2024/11/07 18:42:51 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
-	{
-		c = c + 32;
-	}
+		return (c + 32);
 	return (c);
 }

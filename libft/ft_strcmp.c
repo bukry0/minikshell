@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bcili <bcili@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 13:43:05 by saskin            #+#    #+#             */
-/*   Updated: 2025/08/27 13:43:19 by saskin           ###   ########.fr       */
+/*   Created: 2025/08/28 18:13:16 by bcili             #+#    #+#             */
+/*   Updated: 2025/08/28 18:41:34 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_strcmp(const char *s1, const char *s2)
 	size_t	i;
 
 	i = 0;
-
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 	{
 		i++;

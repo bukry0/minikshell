@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bcili <bcili@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/12 12:28:14 by saskin            #+#    #+#             */
-/*   Updated: 2024/10/23 15:27:16 by saskin           ###   ########.fr       */
+/*   Created: 2024/11/05 19:18:03 by bcili             #+#    #+#             */
+/*   Updated: 2024/11/06 15:30:34 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,14 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	size_t				i;
-	const unsigned char	*p = (const unsigned char *)s;
+	size_t	i;
 
 	i = 0;
 	while (i < n)
 	{
-		if (p[i] == (unsigned char)c)
-			return ((void *)(p + i));
+		if (((unsigned char *)s)[i] == (unsigned char)c)
+			return ((void *)(s + i));
 		i++;
 	}
-	return (NULL);
+	return (0);
 }

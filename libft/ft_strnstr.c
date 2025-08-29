@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bcili <bcili@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 14:39:01 by saskin            #+#    #+#             */
-/*   Updated: 2024/10/23 13:30:02 by saskin           ###   ########.fr       */
+/*   Created: 2024/11/05 19:19:24 by bcili             #+#    #+#             */
+/*   Updated: 2024/11/05 20:02:59 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,23 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t	i;
 	size_t	j;
 
-	i = 0;
-	if (!*needle)
+	if (*needle == '\0')
+	{
 		return ((char *)haystack);
+	}
+	i = 0;
 	while (haystack[i] && i < len)
 	{
 		j = 0;
-		while (haystack[i + j] && haystack[i + j] == needle[j] && i + j < len)
+		while (haystack[i + j] && haystack[i + j] == needle[j] && (i + j) < len)
 		{
-			if (needle[j + 1] == '\0')
-				return ((char *)haystack + i);
 			j++;
+			if (needle[j] == '\0')
+			{
+				return ((char *)&haystack[i]);
+			}
 		}
 		i++;
 	}
-	return (NULL);
+	return (0);
 }

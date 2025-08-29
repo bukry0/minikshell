@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: saskin <saskin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bcili <bcili@student.42istanbul.com.tr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 18:19:48 by saskin            #+#    #+#             */
-/*   Updated: 2024/10/23 15:11:00 by saskin           ###   ########.fr       */
+/*   Created: 2024/11/05 19:17:48 by bcili             #+#    #+#             */
+/*   Updated: 2024/11/07 18:37:11 by bcili            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_isascii(int c)
 {
-	if (c <= 127 && c >= 0)
-		return (1);
-	return (0);
+	return (c >= 0 && c <= 127);
 }

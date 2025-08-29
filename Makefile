@@ -1,75 +1,59 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: denizozd <denizozd@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/21 20:35:04 by denizozd          #+#    #+#              #
-#    Updated: 2024/09/16 20:03:05 by denizozd         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-G = "\033[32m"
-Y = "\033[33m"
-B = "\033[34m"
-X = "\033[0m"
-UP = "\033[A"
-CUT = "\033[K"
-
 NAME = minishell
-CC = cc
-CFLAGS = -Wall -Werror -Wextra
-LIBFTPATH = ./libft
-LIBFT = $(LIBFTPATH)/libft.a
-CPPFLAGS	= -I/Users/$(USER)/.brew/opt/readline/include
 
-SRCDIR = src
-OBJDIR = obj
+CFLAGS = -Wall -Wextra -Werror -g
 
-SRCS = $(wildcard $(SRCDIR)/*.c)
-OBJS = $(SRCS:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+SRC =	minishell.c \
+		execute/builtins.c \
+		builtin_commands/manuel_cd.c \
+		builtin_commands/manuel_echo.c \
+		builtin_commands/manuel_env.c \
+		builtin_commands/manuel_exit.c \
+		builtin_commands/manuel_export.c \
+		builtin_commands/manuel_pwd.c \
+		builtin_commands/manuel_unset.c \
+		env_functions/env_utils.c \
+		execute/exec.c \
+		execute/exec_utils.c \
+		exit/exit_minishell.c \
+		expander/expand_var_utils.c \
+		expander/expander.c \
+		garbage/garbage_collector.c \
+		garbage/garbage_lib.c \
+		garbage/grbg_itoa.c \
+		redirections/handle_redirections.c \
+		lexer/handle_spaces.c \
+		lexer/handle_spaces_utils.c \
+		redirections/heredoc.c \
+		utils/init.c \
+		lexer/lexer.c \
+		list_functions/list_functions.c \
+		list_functions/list_utils.c \
+		parser/parser.c \
+		parser/parser_utils.c \
+		lexer/signal_handler.c \
+		utils/split_input.c \
+		utils/utils.c \
+		utils/error_utils.c \
+		utils/quotes_utils.c \
+		utils/str_utils.c
 
-all: $(LIBFT) $(NAME)
+OBJ =	$(SRC:.c=.o)
 
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
+LIBFT = libft/libft.a
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	@echo $(Y)Compiling $<$(X)
-	@$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
-	@printf $(UP)$(CUT)
+all: $(NAME)
 
-$(LIBFT):
-	@if [ ! -d $(LIBFTPATH) ]; then \
-		git submodule update --init --recursive; \
-	fi
-
-	@if [ ! -f $(LIBFTPATH)/libft.a ]; then \
-		make -s -C $(LIBFTPATH); \
-	fi
-	@echo $(G)"Created		[libft]"$(X)
-
-$(NAME): $(LIBFT) $(OBJS)
-	@echo $(Y)"Compiling	"[$(SRCS)]$(X)
-	@echo $(G)"Created		"[$(SRCS)]$(X)
-	@echo $(Y)"Compiling	"[$(NAME)]$(X)
-	@$(CC) $(OBJS) $(LDFLAGS) $(CPPFLAGS) -lreadline -L$(LIBFTPATH) -lft -o $(NAME)
-	@echo $(G)"Created		"[$(NAME)]$(X)
+$(NAME): $(SRC)
+	make -C ./libft -s
+	cc -o $(NAME) $(CFLAGS) $(SRC) -lreadline $(LIBFT)
 
 clean:
-	@echo $(B)"Removing	objectfiles"$(X)
-	@rm -rf $(OBJDIR)
-	@echo $(G)"Removed		objectfiles"$(X)
+	make clean -C ./libft -s
 
 fclean: clean
-	@echo $(B)"Removing	executable"$(X)
-	@rm -f $(NAME)
-	@echo $(G)"Removed		executable"$(X)
-	@echo $(B)"Removing	library"$(X)
-	@cd $(LIBFTPATH) && make fclean > /dev/null
-	@echo $(G)"Removed		library"$(X)
+	make fclean -C ./libft -s
+	rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all, clean, fclean, re
